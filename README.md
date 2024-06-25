@@ -20,10 +20,10 @@ DRO sistemi omogočajo več funckij, na tem projektu se bom osredotočil le na n
  
 # Projekt
 ## Sestavni deli
-•	Arduino Mega (po želji tudi drug Arduino)
-•	Merilna letev Iskra TELA TGM111
-•	Raspberry Pi 2B **
-•	7-palčni Raspberry Pi zaslon **
+•	Arduino Mega (po želji tudi drug Arduino) <br />
+•	Merilna letev Iskra TELA TGM111 <br />
+•	Raspberry Pi 2B ** <br /> 
+•	7-palčni Raspberry Pi zaslon ** <br />
 **Po želji, saj za delovanje samega DRO sistema ta komponenta ni potrebna
 ## Povezava Arduino mikrokontrolerja z merilno letvijo
 Moja merilna letev za povezavo uporablja 12-pinski konektor. Kljub večjemu številu pinov so za povezavo potrebni le štiri pini. Ostali služijo različnim namenom kot je varnost same naprave.
