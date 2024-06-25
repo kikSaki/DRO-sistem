@@ -46,6 +46,7 @@ Moja merilna letev za povezavo uporablja 12-pinski konektor. Kljub večjemu šte
 
 ![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/cbd29baf-b51c-4358-ba46-3eb8d4cdd75c) <br > 
 Slika 7: Označeni pini na 12-pinskem konektorju, ki so potrebni za povezavo <br />
+
 Pin B se na Arduino poveže na 5 V, pin K se poveže na GND, pina G in H pa na digitalne pine, v mojem primeru sem jih dal na pin 2 in pin 4.
 
 ![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/3002b192-5947-4c25-8978-6e39868b3d49) <br >
