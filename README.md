@@ -7,14 +7,30 @@ Merilne letve so ključen instrument za natančno merjenje razdalj, višin in dr
 
 # Merilne letve
 Merilne letve so ključno orodje v različnih industrijah, ki omogočajo natančna merjenja dolžin, višin, širin in drugih dimenzij. Njihova uporabnost sega od gradbeništva do znanstvenih raziskav, kjer so nepogrešljive pri zagotavljanju natančnosti in zanesljivosti meritev.
-Njihova zasnova omogoča enostavno uporabo in natančno merjenje, kar je ključno pri številnih aplikacijah, kjer je potrebna natančna dimenzijska analiza.
+Njihova zasnova omogoča enostavno uporabo in natančno merjenje, kar je ključno pri številnih aplikacijah, kjer je potrebna natančna dimenzijska analiza. <br >
+
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/438dfe3a-0798-4740-9cf2-a0a5a1414df8)
+Slika 1: Zaprta merilna letev Heidenhain
+
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/db0d7b2a-c74c-494e-b337-9dae73b87ef1)
+Slika 2: Odprta merilna letev
+
 Glavna tehnologija merjenja je fotoelktrično skeniranje, pri katerem skeniranje zazna izjemno fine črte široke le nekaj mikrometrov. Samo merjenje pa lahko poteka na dva načina. Absolutno, kjer je vrednost položaja na voljo takoj ob vklopu kodirnika in inkrementalno, ki uporablja izhodiščne referenčne točke.
- 
+
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/ecc3cc3e-a6c0-4675-94df-84b765379ffe)
 Slika 3: Fotoelektrično skeniranje
 
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/1d54cde9-0084-4a19-9fdd-ce338ffc9255)
+Slika 4: Vrste rež na letvah
 
 # Digitalni kazalniki (DRO)
 Digitalni kazalniki za merilne letve omogočajo enostavno branje meritev v numerični obliki, kar povečuje uporabnost in natančnost. Merilna letev se z DRO sistemom poveže z RS2332 DB9 ali pa z 12 oz. 7-pinskim konektorjem. Povezovanje z merilno letvijo je običajno enostavno in intuitivno, saj večina proizvajalcev ponuja jasna navodila in uporabniško prijazne aplikacije za upravljanje naprave.
+
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/9bfb55bf-76a7-4b35-852e-75bb2e67ea43)
+Slika 5: Primer starejšega DRO sistem ISKRA
+
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/5a7cbf9d-d94c-4c45-8c34-8a98132e5e71)
+Slika 6: Primer novejšega DRO sistema ISKRA
  
 DRO sistemi omogočajo več funckij, na tem projektu se bom osredotočil le na nekaj pomembnejših.
  
@@ -27,10 +43,12 @@ DRO sistemi omogočajo več funckij, na tem projektu se bom osredotočil le na n
 **Po želji, saj za delovanje samega DRO sistema ta komponenta ni potrebna
 ## Povezava Arduino mikrokontrolerja z merilno letvijo
 Moja merilna letev za povezavo uporablja 12-pinski konektor. Kljub večjemu številu pinov so za povezavo potrebni le štiri pini. Ostali služijo različnim namenom kot je varnost same naprave.
- 
+
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/cbd29baf-b51c-4358-ba46-3eb8d4cdd75c)
 Slika 7: Označeni pini na 12-pinskem konektorju, ki so potrebni za povezavo <br />
 Pin B se na Arduino poveže na 5 V, pin K se poveže na GND, pina G in H pa na digitalne pine, v mojem primeru sem jih dal na pin 2 in pin 4.
- 
+
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/3002b192-5947-4c25-8978-6e39868b3d49)
 Slika 8: Povezava med merilno letvijo in Arduino mikrokontrolerjem
 ## Arduino program
 Program, ki je potreben za branje podatkov je izjemno preprost.
@@ -106,13 +124,13 @@ void printej(int encoder0Pos){
      Serial.println(encoder0Pos);
 }
 ```
- 
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/7828a021-c59f-47e6-9c56-5c1e38e5458c)
 Slika 9: Prikaz serijskega monitorja in podatkov merilne letve
  
 ## Python program
 V python-u sem naredil grafični vmesnik za sistem DRO, ki se preko serijskega port-a poveže na Arduino za branje podatkov. Program omogoča branje in prikaz podatkov iz mikrokontrolerja, ponastavitev mikrokontrolerja na branje iz ničle in pa nastavitev vrednosti od katere naprej bo mikrokontroler meril naprej oz. nazaj. Sam program je trenutno dopolnjen za eno merilno letev, v tem primeru za X os.
 
- 
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/ffa68b68-4ce0-4e52-9edb-e773bcb27240)
 Slika 10: Grafični vmesnik za DRO sistem
 ### Knjižnice:
 Za grafični vmesnik se lahko uporabi mnogo različnih knjižnic (sam sem uporabil PyQt5), zato ne bom veliko razlagal kako je narejen sam izgled vmesnika, ampak bolj o funkcionalnostih. <br />
@@ -184,11 +202,20 @@ elif a.objectName() == "Enter":
             self.clear.setEnabled(False)
             self.enter.setEnabled(False)
  ```
+
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/fe849c5f-7317-4965-9c49-bf08a1b9dbb2)
 Slika 11: Prikaz uporabniškega vnosa
 
 ## Raspberry Pi in 7-palčni zaslon
 DRO sistem je sicer že končan in ga lahko uporabljamo na željenih napravah (Windows, Linux), saj je vmesnik narejen v Python programskem jeziku. Ker pa imam na zalogi en Raspberry Pi 2B, ki mu ne dela HDMI port in 7-palčni zaslon na dotik iz drugega projekta sem se odločil, da DRO sistem in Raspberry Pi z zaslonom združim.  <br />
 7-palčni zaslon ima modul za povezavo z Raspberry Pi-jem in je povezava preprosta. Potrebuje le povezavo 5 V, GND in ploščati kabel za prenos podatkov.
+
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/e9ae99c3-903b-489e-981d-c5e0cb0d491d)
+Slika 12: Raspberry Pi povezan z zaslonom
+
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/0ff6c204-b95d-4ce9-9457-9522c6b80b5a)
+Slika 13: Sprednja stran zaslona - Raspbian
+
 
  Za operacijski sistem sem se odločil za Raspbian, možna pa je uporaba skoraj katerega koli operacijskega sistema, ki lahko zažene program z grafičnim vmesnikom. Zaželjeno je tudi, da omogoča uporabo dotika na zaslonu, saj je uporaba narejenega DRO sistema prijazna tudi uporabi na dotik. <br />
 ### Grafični vmesnik na operacijskem sistemu Linux
@@ -199,7 +226,8 @@ Naredil sem tudi skripto, ki izvede ukaz python3 /home/maj/Desktop/gui.py v term
 #!/bin/bash
 python3 /home/maj/Desktop/gui.py
 ```
- 
+
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/b02c65a3-5389-4ad4-8ee9-1957dc16a684)
 Slika 14: Prototip DRO sistema z merilno letvijo
 
 
