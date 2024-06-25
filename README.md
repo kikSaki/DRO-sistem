@@ -36,19 +36,21 @@ Slika 8: Povezava med merilno letvijo in Arduino mikrokontrolerjem
 Program, ki je potreben za branje podatkov je izjemno preprost.
 
 ### Definicija pinov:
+```
 #define encoder0PinA  2 <br />
 #define encoder0PinB  4
-
+```
 ### Inicializacija spremenljivk:
+```
 volatile int encoder0Pos = 0; //Pozicija merilne letve <br />
 boolean newdata = false; //Ali se je kodirnik premaknil
 
 String input; //Za branje serijske povezave
-
+```
 ### Setup:
 Funkcijo attachInterrupt uporabimo, da se ob vsaki zaznani spremembi izvede funkcija doEncoder, normalno pa se lahko izvajajo pa še ostali deli kode.  <br />
 Zanimivo je tudi, da v sami dokumentaciji funkcije attachInterrupt piše, da se velikokrat ta funkcija uporablja pri rotacijskih kodirnikih. V mojem primeru je ta kodirnik linearen.
-
+```
 void setup() {
   Serial.begin (115200);
   pinMode(encoder0PinA, INPUT); //Pin 2 = Input
@@ -59,8 +61,9 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(encoder0PinA), doEncoder, CHANGE);  // encoder pin on interrupt 0 - pin 2
   attachInterrupt(digitalPinToInterrupt(encoder0PinB), doEncoder, CHANGE);
 }
-
+```
 ### Zanka:
+```
 void loop()
 {
   //Če je bil kodirnik premaknjen
@@ -78,10 +81,12 @@ void loop()
 
   newdata = false; //Spremeni na False dokler ne pridejo novi podatki
 }
+```
 
 
 ### Branje kodirnika:
 V mojem primeru je obseg podatkov od približno 0 – 32000 oz. do -32000 (minus) odvisno od smeri premikanja.  <br />
+```
 void doEncoder() //Če se zgodi prekinitev, se izvede ta funkcija
 {
   //Če arduino zazna vzpon kvadratnega signala 
@@ -93,13 +98,14 @@ void doEncoder() //Če se zgodi prekinitev, se izvede ta funkcija
   }
   newdata = true; //Spremenimo na True, saj imamo nove podatke 
 }
-
+```
 ### Pisanje na serijski port:
 Podatke pišemo na serijski port, saj jih kasneje obdelamo v drugem programu. Prav tako pa lahko delovanje testiramo v Arduino IDE, tako da odpremo serijski monitor in spremljamo izpis. <br />
+```
 void printej(int encoder0Pos){
      Serial.println(encoder0Pos);
 }
-
+```
  
 Slika 9: Prikaz serijskega monitorja in podatkov merilne letve
  
@@ -110,12 +116,14 @@ V python-u sem naredil grafični vmesnik za sistem DRO, ki se preko serijskega p
 Slika 10: Grafični vmesnik za DRO sistem
 ### Knjižnice:
 Za grafični vmesnik se lahko uporabi mnogo različnih knjižnic (sam sem uporabil PyQt5), zato ne bom veliko razlagal kako je narejen sam izgled vmesnika, ampak bolj o funkcionalnostih. <br />
+```
 import sys
 import serial //Za serijsko povezavo
 from time import sleep
-
+```
 ### Serijska povezava:
 Za serijsko povezavo sem ustvaril svoj razred, ki bere in piše iz ali na serijski port. <br />
+```
 class UpdateX(QObject):
     progress = pyqtSignal(str)
     // Poveži preko serijskega porta
@@ -130,8 +138,10 @@ class UpdateX(QObject):
     //Piši vrednost, ki jo določi uporabnik, na mikrokontroler
     def setX(self, value):
         self.arduinoX.write(value.encode())
+```
 ### Nitenje:
 V primeru, da imamo več merilnih letev, vsako za svojo os, lahko uporabimo niti za vzporedno delovanje. To naredimo v inicializaciji razreda za grafični vmesnik. <br />
+```
 self.updateX = UpdateX()
 self.xThread = QThread()
 
@@ -142,9 +152,10 @@ self.updateX.progress.connect(self.setX)
 self.updateX.moveToThread(self.xThread)
 self.xThread.started.connect(self.updateX.setX_os)
 self.xThread.start()
-
+```
 ### Reset – ponastavitev:
 Ena glavnih funkcij DRO sistema je ponastavitev vrednosti v prejšno oz. začetno stanje. Na tem projektu, je ponastavitev vrednosti vedno v začetno stanje, kar je enako 0. <br />
+```
 def resetButton(self, b):
 //Z nastavitvijo setDTR na False in True, lahko ponastavimo Arduino na začetno stanje
         if b.objectName() == "resX":
@@ -152,11 +163,11 @@ def resetButton(self, b):
             UpdateX.arduinoX.setDTR(False)
             sleep(0.22)
             UpdateX.arduinoX.setDTR(True)
-
+```
 ### Uporabnikov vnos:
 Uporabnik ima možnost vpisa svoje začetne vrednosti, od katere se bo naprej merilo. To lahko stori s pritiskom na gumb ob osi, ki jo želi nastaviti (npr. gumb X).  <br />
 Trenutna meritev se izbriše, uporabnik pa lahko sedaj vpiše vrednost. Če se zmoti pritisne na gumb Clear, da se napačne vrednost zbriše. Ko vpiše željeno vrednost pritisne na gumb Enter, ki pokliče funkcijo, razreda UpdateX, setX, ki vrednost napiše na serijski port in jo prebere Arduino. Gumbi za nastavitev vrednosti se prav tako onemogočijo in se omogočijo šele ko uporabnik ponovno klikne na gumb X.
-
+```
 elif a.objectName() == "Enter":
             self.updateX.setX(text) //Funkcija za pisanje na serijski port
 	
@@ -172,7 +183,7 @@ elif a.objectName() == "Enter":
             self.nič.setEnabled(False)
             self.clear.setEnabled(False)
             self.enter.setEnabled(False)
- 
+ ```
 Slika 11: Prikaz uporabniškega vnosa
 
 ## Raspberry Pi in 7-palčni zaslon
@@ -184,9 +195,10 @@ DRO sistem je sicer že končan in ga lahko uporabljamo na željenih napravah (W
 Za razliko od Windows sistemov moramo na Linux-u v python skripti na začetku dodati vrstico #!/usr/bin/python3. Prav tako je potrebno spremeniti serijsko povezavo, saj ni več COM port. Povezavo lahko najdemo v datoteki /dev/ nekje pod imenom tty.  V mojem primeru je bilo ime ttyACM0. Torej v python skripti namesto COM3 napišemo /dev/ttyACM0. <br />
 arduinoX = serial.Serial(port='/dev/ttyACM0', baudrate=115200) <br />
 Naredil sem tudi skripto, ki izvede ukaz python3 /home/maj/Desktop/gui.py v terminalu. <br />
+```
 #!/bin/bash
 python3 /home/maj/Desktop/gui.py
-
+```
  
 Slika 14: Prototip DRO sistema z merilno letvijo
 
