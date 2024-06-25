@@ -37,12 +37,12 @@ Program, ki je potreben za branje podatkov je izjemno preprost.
 
 ### Definicija pinov:
 ```
-#define encoder0PinA  2 <br />
+#define encoder0PinA  2 
 #define encoder0PinB  4
 ```
 ### Inicializacija spremenljivk:
 ```
-volatile int encoder0Pos = 0; //Pozicija merilne letve <br />
+volatile int encoder0Pos = 0; //Pozicija merilne letve 
 boolean newdata = false; //Ali se je kodirnik premaknil
 
 String input; //Za branje serijske povezave
@@ -193,7 +193,7 @@ DRO sistem je sicer že končan in ga lahko uporabljamo na željenih napravah (W
  Za operacijski sistem sem se odločil za Raspbian, možna pa je uporaba skoraj katerega koli operacijskega sistema, ki lahko zažene program z grafičnim vmesnikom. Zaželjeno je tudi, da omogoča uporabo dotika na zaslonu, saj je uporaba narejenega DRO sistema prijazna tudi uporabi na dotik. <br />
 ### Grafični vmesnik na operacijskem sistemu Linux
 Za razliko od Windows sistemov moramo na Linux-u v python skripti na začetku dodati vrstico #!/usr/bin/python3. Prav tako je potrebno spremeniti serijsko povezavo, saj ni več COM port. Povezavo lahko najdemo v datoteki /dev/ nekje pod imenom tty.  V mojem primeru je bilo ime ttyACM0. Torej v python skripti namesto COM3 napišemo /dev/ttyACM0. <br />
-arduinoX = serial.Serial(port='/dev/ttyACM0', baudrate=115200) <br />
+```arduinoX = serial.Serial(port='/dev/ttyACM0', baudrate=115200) ```
 Naredil sem tudi skripto, ki izvede ukaz python3 /home/maj/Desktop/gui.py v terminalu. <br />
 ```
 #!/bin/bash
