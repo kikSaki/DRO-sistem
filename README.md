@@ -45,7 +45,7 @@ DRO sistemi omogočajo več funckij, na tem projektu se bom osredotočil le na n
 Moja merilna letev za povezavo uporablja 12-pinski konektor. Kljub večjemu številu pinov so za povezavo potrebni le štiri pini. Ostali služijo različnim namenom kot je varnost same naprave.
 
 ![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/cbd29baf-b51c-4358-ba46-3eb8d4cdd75c) <br > 
-Slika 7: Označeni pini na 12-pinskem konektorju, ki so potrebni za povezavo <br />
+Slika 7: Potrebni pini za povezavo so B, G, H in K <br />
 
 Pin B se na Arduino poveže na 5 V, pin K se poveže na GND, pina G in H pa na digitalne pine, v mojem primeru sem jih dal na pin 2 in pin 4.
 
