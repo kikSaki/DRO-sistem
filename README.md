@@ -204,18 +204,18 @@ elif a.objectName() == "Enter":
             self.enter.setEnabled(False)
  ```
 
-![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/fe849c5f-7317-4965-9c49-bf08a1b9dbb2) <br >
-Slika 11: Prikaz uporabniškega vnosa <br >
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/fe849c5f-7317-4965-9c49-bf08a1b9dbb2) <br />
+Slika 11: Prikaz uporabniškega vnosa <br />
 
 ## Raspberry Pi in 7-palčni zaslon
 DRO sistem je sicer že končan in ga lahko uporabljamo na željenih napravah (Windows, Linux), saj je vmesnik narejen v Python programskem jeziku. Ker pa imam na zalogi en Raspberry Pi 2B, ki mu ne dela HDMI port in 7-palčni zaslon na dotik iz drugega projekta sem se odločil, da DRO sistem in Raspberry Pi z zaslonom združim.  <br />
 7-palčni zaslon ima modul za povezavo z Raspberry Pi-jem in je povezava preprosta. Potrebuje le povezavo 5 V, GND in ploščati kabel za prenos podatkov.
 
-![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/e9ae99c3-903b-489e-981d-c5e0cb0d491d) <br >
-Slika 12: Raspberry Pi povezan z zaslonom<br > 
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/e9ae99c3-903b-489e-981d-c5e0cb0d491d) <br />
+Slika 12: Raspberry Pi povezan z zaslonom <br /> 
 
-![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/0ff6c204-b95d-4ce9-9457-9522c6b80b5a) <br >
-Slika 13: Sprednja stran zaslona - Raspbian <br >
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/0ff6c204-b95d-4ce9-9457-9522c6b80b5a) <br />
+Slika 13: Sprednja stran zaslona - Raspbian <br />
 
 
  Za operacijski sistem sem se odločil za Raspbian, možna pa je uporaba skoraj katerega koli operacijskega sistema, ki lahko zažene program z grafičnim vmesnikom. Zaželjeno je tudi, da omogoča uporabo dotika na zaslonu, saj je uporaba narejenega DRO sistema prijazna tudi uporabi na dotik. <br />
@@ -228,12 +228,18 @@ Naredil sem tudi skripto, ki izvede ukaz python3 /home/maj/Desktop/gui.py v term
 python3 /home/maj/Desktop/gui.py
 ```
 
-![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/b02c65a3-5389-4ad4-8ee9-1957dc16a684) <br >
-Slika 14: Prototip DRO sistema z merilno letvijo <br >
+![image](https://github.com/kikSaki/DRO-sistem/assets/95567298/b02c65a3-5389-4ad4-8ee9-1957dc16a684) <br />
+Slika 14: Prototip DRO sistema z merilno letvijo <br />
 
 
 ## Namestitev v realno okolje
-Izdelek je v okviru predmeta Vhodno-izhodne naprave le prototip končnega izdelka. Če bi hoteli, da se ta izdelek uporablja v realnem okolju, je potrebno zanj narediti še trpežno ohišje in ga namestiti k stroju, kjer se bo le-ta uporabljal.
+Izdelek je v okviru predmeta Vhodno-izhodne naprave le prototip končnega izdelka. Če bi hoteli, da se ta izdelek uporablja v realnem okolju, je potrebno zanj narediti še trpežno ohišje in ga namestiti k stroju, kjer se bo le-ta uporabljal. <br />
+
+![IMG_6672](https://github.com/kikSaki/DRO-sistem/assets/95567298/6b3f82f2-d425-4fb1-83b9-be34dbcd1aac) <br />
+Slika 15: Postavitev merilne letve na stružnici <br />
+
+![IMG_6755](https://github.com/kikSaki/DRO-sistem/assets/95567298/2b486fae-cc9f-4117-842a-d367fe728cc8) <br />
+Slika16: Postavitev druge merilne letve na drugi poziciji <br />
 
 ## Ugotovitve
 Osnoven sistem za prikaz meritev je zelo preprosto razviti. Komplikacije se začnejo pri naprednejših funkcijah, kjer ni potrebno le znanje programiranja in programske opreme ampak tudi strojne opreme, ki jo uporabljamo. <br />
