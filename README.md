@@ -232,7 +232,7 @@ python3 /home/maj/Desktop/gui.py
 Slika 14: Prototip DRO sistema z merilno letvijo <br />
 
 
-## Namestitev v realno okolje
+## Namestitev v realno okolje (TODO)
 Izdelek je v okviru predmeta Vhodno-izhodne naprave le prototip končnega izdelka. Če bi hoteli, da se ta izdelek uporablja v realnem okolju, je potrebno zanj narediti še trpežno ohišje in ga namestiti k stroju, kjer se bo le-ta uporabljal. <br />
 
 ![IMG_6672](https://github.com/kikSaki/DRO-sistem/assets/95567298/6b3f82f2-d425-4fb1-83b9-be34dbcd1aac) <br />
